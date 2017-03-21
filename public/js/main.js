@@ -105,4 +105,25 @@ $(function initializeMap () {
       $('.activities-list').append($('<li>' + selectedActivity + '</li><br>'));
     })
 
+    $('#removeHotel').on('click', function() {
+      $('#removeHotel').siblings('li').last().remove()
+      $('#removeHotel').siblings('br').last().remove()
+
+    })
+
+    $('#removeRest').on('click', function() {
+      $('#removeRest').siblings('li').last().remove()
+      $('#removeHotel').siblings('br').last().remove()
+    })
+
+    $('#removeAct').on('click', function() {
+      $('#removeAct').siblings('li').last().remove()
+      $('#removeHotel').siblings('br').last().remove()
+    })
+
+    $('#day-add').on('click', function() {
+      var num = +$('div.day-buttons').find('button:nth-last-child(2)').text() + 1;
+      $('#day-add').before($('<button class="btn btn-circle day-btn">' + num + '</button>'))
+    });
+
 });
