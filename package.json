@@ -1,0 +1,35 @@
+{
+  "name": "tripplanner",
+  "version": "1.0.0",
+  "description": "plan a fun vaycay to nyc",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "seed": "node seed.js",
+    "build-css": "node-sass -w -r assets/stylesheets -o public/stylesheets"
+  },
+  "keywords": [
+    "fun",
+    "fullstack",
+    "nyc",
+    "js"
+  ],
+  "author": "1702GH",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "body-parser": "^1.17.1",
+    "bootstrap": "^3.3.7",
+    "express": "^4.15.2",
+    "jquery": "^3.2.1",
+    "morgan": "^1.8.1",
+    "nodemon": "^1.11.0",
+    "nunjucks": "^3.0.0",
+    "pg": "^6.1.5",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^3.30.2"
+  },
+  "devDependencies": {
+    "node-sass": "^4.5.1"
+  }
+}
