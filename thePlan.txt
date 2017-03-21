@@ -1,0 +1,12 @@
+Make the navbar work
+Click the blue plus button
+    add the hotel/restaurant/activity down to the specific day
+    add marker to the map/ resize the map to center on the markerS
+toggle between different days
+    resizes map to include all markers
+use red x button to get rid of days or activities
+add an extra blank day if + clicked
+if it's a hotel add --> replaces the hotel for the day
+restaurants adds --> up to three restaurants
+- DO NOT ALLOW FOURTH RESTAURANT TO BE ADDED
+activities adds --> unlimited activities

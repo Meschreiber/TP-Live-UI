@@ -63,8 +63,28 @@ $(function initializeMap () {
     marker.setMap(currentMap);
   }
 
-  drawMarker('hotel', [40.705137, -74.007624]);
-  drawMarker('restaurant', [40.705137, -74.013940]);
-  drawMarker('activity', [40.716291, -73.995315]);
+  // drawMarker('hotel', [40.705137, -74.007624]);
+  // drawMarker('restaurant', [40.705137, -74.013940]);
+  // drawMarker('activity', [40.716291, -73.995315]);
 
+    hotels.forEach(function(element){
+        $('[data-type="hotels"]').append("<option>"+ element.name + "</option>");
+    });
+
+    restaurants.forEach(function(element){
+        $('[data-type="restaurants"]').append("<option>"+ element.name + "</option>");
+    });
+
+    activities.forEach(function(element){
+        $('[data-type="activities"]').append("<option>"+ element.name + "</option>");
+    });
+
+    function addHotel(){
+      var selectedHotel = $('.btn-primary').siblings('[data-type="hotels"]').find("option:selected").text();
+      
+    }
 });
+
+
+
+
