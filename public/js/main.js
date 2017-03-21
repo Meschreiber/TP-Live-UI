@@ -27,12 +27,12 @@ $(function initializeMap () {
       featureType: 'road.highway',
       elementType: 'geometry.fill',
       stylers: [{ color: '#ef8c25' }, { lightness: 40 }]
-    }, 
+    },
     {
       featureType: 'road.highway',
       elementType: 'geometry.stroke',
       stylers: [{ visibility: 'off' }]
-    }, 
+    },
     {
       featureType: 'poi.park',
       elementType: 'geometry.fill',
@@ -79,12 +79,11 @@ $(function initializeMap () {
         $('[data-type="activities"]').append("<option>"+ element.name + "</option>");
     });
 
-    function addHotel(){
-      var selectedHotel = $('.btn-primary').siblings('[data-type="hotels"]').find("option:selected").text();
-      
-    }
+
+
+     $('.btn-primary').first().on('click', function() {
+        var selectedHotel = $('.btn-primary').siblings('[data-type="hotels"]').find("option:selected").text();
+        $('.itinerary-item').first().append($('<li>' + selectedHotel + '</li> <br>'));
+      })
+
 });
-
-
-
-

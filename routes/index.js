@@ -13,6 +13,7 @@ router.get('/', function(req, res, next) {
 		Activity.findAll()
 	])
 	.spread(function(hotels, restaurants, activities) {
+		console.log('We got these: ', hotels, restaurants, activities)
 		res.render('index', {
 			hotels: hotels,
 			restaurants: restaurants,

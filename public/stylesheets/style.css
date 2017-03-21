@@ -106,6 +106,10 @@ h3 {
     .day-btn.current-day:hover {
       background: #fff; }
 
+      .btn-danger {
+        float: right;
+      }
+
 .panel-default {
   background: #efecea;
   border-radius: 8px;
