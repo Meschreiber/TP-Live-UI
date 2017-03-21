@@ -80,10 +80,29 @@ $(function initializeMap () {
     });
 
 
-
-     $('.btn-primary').first().on('click', function() {
+    // hotels event listener
+    $('#hotelButton').on('click', function() {
+        // if there is not already a selected hotel
+        if($('.hotel-list').has('li').length){
+          console.log('It has kids.');
+          $('.hotel-list').children('li').remove();
+          $('.hotel-list').children('br').remove();
+        }
         var selectedHotel = $('.btn-primary').siblings('[data-type="hotels"]').find("option:selected").text();
-        $('.itinerary-item').first().append($('<li>' + selectedHotel + '</li> <br>'));
-      })
+        $('.hotel-list').append($('<li>' + selectedHotel + '</li><br>'));
+    })
+
+    // restaurants event listener
+      $('#restButton').on('click', function() {
+      var selectedRestaurant = $('.btn-primary').siblings('[data-type="restaurants"]').find("option:selected").text();
+      $('.restaurant-list').append($('<li>' + selectedRestaurant + '</li><br>'));
+    })
+
+    // activities event listener
+        // restaurants event listener
+      $('#actButton').on('click', function() {
+      var selectedActivity = $('.btn-primary').siblings('[data-type="activities"]').find("option:selected").text();
+      $('.activities-list').append($('<li>' + selectedActivity + '</li><br>'));
+    })
 
 });
