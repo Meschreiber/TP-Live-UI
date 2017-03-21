@@ -89,6 +89,9 @@ $(function initializeMap () {
           $('.hotel-list').children('br').remove();
         }
         var selectedHotel = $('.btn-primary').siblings('[data-type="hotels"]').find("option:selected").text();
+        var dayNum = whichDay();
+        days[dayNum - 1].hotel = selectedHotel;
+        //console.log(days[dayNum - 1].hotel);
         $('.hotel-list').append($('<li>' + selectedHotel + '</li><br>'));
     })
 
@@ -96,6 +99,8 @@ $(function initializeMap () {
       $('#restButton').on('click', function() {
       var selectedRestaurant = $('.btn-primary').siblings('[data-type="restaurants"]').find("option:selected").text();
       $('.restaurant-list').append($('<li>' + selectedRestaurant + '</li><br>'));
+       var dayNum = whichDay();
+       days[dayNum - 1].restaurants.push(selectedRestaurant);
     })
 
     // activities event listener
@@ -103,27 +108,65 @@ $(function initializeMap () {
       $('#actButton').on('click', function() {
       var selectedActivity = $('.btn-primary').siblings('[data-type="activities"]').find("option:selected").text();
       $('.activities-list').append($('<li>' + selectedActivity + '</li><br>'));
+      var dayNum = whichDay();
+      days[dayNum - 1].activities.push(selectedActivity);
+      console.log(days[dayNum - 1])
     })
 
+    // removes last hotel
     $('#removeHotel').on('click', function() {
       $('#removeHotel').siblings('li').last().remove()
       $('#removeHotel').siblings('br').last().remove()
 
     })
 
+    // removes last restaurant
     $('#removeRest').on('click', function() {
       $('#removeRest').siblings('li').last().remove()
       $('#removeHotel').siblings('br').last().remove()
     })
 
+    // removes last activity
     $('#removeAct').on('click', function() {
       $('#removeAct').siblings('li').last().remove()
       $('#removeHotel').siblings('br').last().remove()
     })
 
+    // adds another day button
     $('#day-add').on('click', function() {
       var num = +$('div.day-buttons').find('button:nth-last-child(2)').text() + 1;
       $('#day-add').before($('<button class="btn btn-circle day-btn">' + num + '</button>'))
+      createDay();
+      $('#itinerary').find('li', 'br').remove();
+
     });
+
+
+    //Click on a button --> it becomes current day, other selected days become unselected
+$('.day-buttons').on('click', function(e) {
+    $('.day-btn').removeClass('current-day');
+    $(e.target).addClass('current-day');
+  });
+
+    // Models to store information from days
+
+    var Day = function(){
+
+      this.hotel = null;
+      this.restaurants = [];
+      this.activities = [];
+    }; 
+
+    var days = [new Day];
+
+    function createDay(){
+      days.push(new Day);
+    }
+
+
+    function whichDay(){
+      // returns the number of the day that is selected
+      return $('.day-buttons').find('.current-day').text();
+    }
 
 });
