@@ -138,8 +138,9 @@ $(function initializeMap () {
       $('.day-btn').removeClass('current-day');
       $('#day-add').before($('<button class="btn btn-circle day-btn current-day">' + num + '</button>'))
       createDay();
-      $('#itinerary').find('li', 'br').remove();
-
+      $('#itinerary').find('li').remove();
+      $('#itinerary').find('br').remove();
+      $('#day-title').children('span').text('Day ' + num);
     });
 
 
@@ -148,6 +149,8 @@ $('.day-buttons').on('click', function(e) {
   if($(e.target).attr("id") === undefined) {
     $('.day-btn').removeClass('current-day');
     $(e.target).addClass('current-day');
+    var numDay = whichDay();
+    $('#day-title').children('span').text('Day ' + numDay);
 }
   var numDay = whichDay();
   displayDay(numDay);
