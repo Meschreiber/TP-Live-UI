@@ -135,7 +135,7 @@ $(function initializeMap () {
     // adds another day button
     $('#day-add').on('click', function() {
       var num = +$('div.day-buttons').find('button:nth-last-child(2)').text() + 1;
-      $('#day-add').before($('<button class="btn btn-circle day-btn">' + num + '</button>'))
+      $('#day-add').before($('<button class="btn btn-circle day-btn current-day">' + num + '</button>'))
       createDay();
       $('#itinerary').find('li', 'br').remove();
 
@@ -144,8 +144,10 @@ $(function initializeMap () {
 
     //Click on a button --> it becomes current day, other selected days become unselected
 $('.day-buttons').on('click', function(e) {
+  if !($(e.target).attr("id")) {
     $('.day-btn').removeClass('current-day');
     $(e.target).addClass('current-day');
+  }
   });
 
     // Models to store information from days
@@ -155,7 +157,7 @@ $('.day-buttons').on('click', function(e) {
       this.hotel = null;
       this.restaurants = [];
       this.activities = [];
-    }; 
+    };
 
     var days = [new Day];
 
