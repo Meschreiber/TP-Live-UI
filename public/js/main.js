@@ -84,7 +84,7 @@ $(function initializeMap () {
     $('#hotelButton').on('click', function() {
         // if there is not already a selected hotel
         if($('.hotel-list').has('li').length){
-          console.log('It has kids.');
+          //console.log('It has kids.');
           $('.hotel-list').children('li').remove();
           $('.hotel-list').children('br').remove();
         }
@@ -110,7 +110,6 @@ $(function initializeMap () {
       $('.activities-list').append($('<li>' + selectedActivity + '</li><br>'));
       var dayNum = whichDay();
       days[dayNum - 1].activities.push(selectedActivity);
-      console.log(days[dayNum - 1])
     })
 
     // removes last hotel
@@ -151,22 +150,57 @@ $('.day-buttons').on('click', function(e) {
     $(e.target).addClass('current-day');
     var numDay = whichDay();
     $('#day-title').children('span').text('Day ' + numDay);
-}
-  var numDay = whichDay();
-  displayDay(numDay);
+  }
+    var numDay = whichDay();
+    displayDay(numDay);
   });
+  
+  $('#removeDay').on('click', function(e) {
+    var numDay = whichDay();
+    console.log('You are trying to remove day ', numDay);
+    removeDay(numDay);
+    //$('div.day-buttons').find('button:nth-last-child(2)').remove();
+    });
+
+    // Remove current day --> day will be deleted from our data structure
+    // changes will be reflected aesthetically
+    function removeDay(numDay){
+      days.splice(numDay - 1, 1);
+      console.log(days);
+      displayDay(numDay - 1);  
+      // actions for first day 
+      if (+numDay === 1) {
+      console.log("You are trying to remove the first day.")
+      $('div.day-buttons').find('button:nth-last-child(2)').remove();
+      }
+      // actions for last day
+      else if(numDay - 1 === days.length){ // this means it is the last day
+        console.log("You are in the last day section.") 
+        $('div.day-buttons').find('button:nth-last-child(2)').remove();
+        $('div.day-buttons').find('button:nth-last-child(2)').addClass('current-day');
+        $('#day-title').children('span').text('Day ' + (numDay - 1));
+      } 
+      // actions for middle day
+      else if(numDay - 1 < days.length){
+        console.log("You are trying to remove a middle day.")
+        $('div.day-buttons').find('button:nth-last-child(2)').remove();
+        // select the day's button before the day that was removed
+        $('.day-btn').removeClass('current-day');
+        $('div.day-buttons').find('button:nth-child(' + (numDay - 1) + ')').addClass('current-day');
+        $('#day-title').children('span').text('Day ' + (numDay - 1));
+      }
+    }
+
 
     // Models to store information from days
 
     var Day = function(){
-
       this.hotel = null;
       this.restaurants = [];
       this.activities = [];
     };
 
     var days = [new Day];
-
     function createDay(){
       days.push(new Day);
     }
@@ -180,7 +214,7 @@ $('.day-buttons').on('click', function(e) {
     function displayDay(numDay) {
       $('#itinerary').find('li').remove();
       $('#itinerary').find('br').remove();
-
+      if(numDay === 0) numDay ++;
       if(days[numDay-1].hotel) {
       $('.hotel-list').append($('<li>' + days[numDay - 1].hotel + '</li><br>'));
 }
