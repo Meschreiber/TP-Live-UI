@@ -135,6 +135,7 @@ $(function initializeMap () {
     // adds another day button
     $('#day-add').on('click', function() {
       var num = +$('div.day-buttons').find('button:nth-last-child(2)').text() + 1;
+      $('.day-btn').removeClass('current-day');
       $('#day-add').before($('<button class="btn btn-circle day-btn current-day">' + num + '</button>'))
       createDay();
       $('#itinerary').find('li', 'br').remove();
@@ -144,10 +145,12 @@ $(function initializeMap () {
 
     //Click on a button --> it becomes current day, other selected days become unselected
 $('.day-buttons').on('click', function(e) {
-  if !($(e.target).attr("id")) {
+  if($(e.target).attr("id") === undefined) {
     $('.day-btn').removeClass('current-day');
     $(e.target).addClass('current-day');
-  }
+}
+  var numDay = whichDay();
+  displayDay(numDay);
   });
 
     // Models to store information from days
@@ -169,6 +172,25 @@ $('.day-buttons').on('click', function(e) {
     function whichDay(){
       // returns the number of the day that is selected
       return $('.day-buttons').find('.current-day').text();
+    }
+
+    function displayDay(numDay) {
+      $('#itinerary').find('li').remove();
+      $('#itinerary').find('br').remove();
+
+      if(days[numDay-1].hotel) {
+      $('.hotel-list').append($('<li>' + days[numDay - 1].hotel + '</li><br>'));
+}
+      var restaurants = days[numDay - 1].restaurants;
+      restaurants.forEach(function(restaurant) {
+        $('.restaurant-list').append($('<li>' + restaurant + '</li><br>'));
+      })
+
+      var activities = days[numDay - 1]. activities;
+      activities.forEach(function(activity) {
+        $('.activities-list').append($('<li>' + activity + '</li><br>'));
+      })
+
     }
 
 });
